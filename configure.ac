@@ -1371,6 +1371,12 @@ if test "x$enable_mp" != "xno"; then
 	    [Define to 1 to enable support for multiple processors.])
 fi
 
+AC_ARG_ENABLE(openmp, [  --disable-openmp            disable support for OpenMP])
+
+if test "x$enable_openmp" != "xno"; then
+  AC_DEFINE(ENABLE_OPENMP, 1,
+	    [Define to 1 to enable support for OpenMP.])
+fi
 
 ################################
 # Some plug-ins are X11 specific

@@ -15,6 +15,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/*check this file for potential code edits*/
+
 #include "config.h"
 
 #include <cairo.h>

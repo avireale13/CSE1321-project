@@ -18,6 +18,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+ /*Core code: look in GimpSymmetry class to add symmetry*/
+
 #ifndef __GIMP_SYMMETRY_H__
 #define __GIMP_SYMMETRY_H__
 

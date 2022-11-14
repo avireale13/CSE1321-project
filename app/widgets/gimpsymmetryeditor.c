@@ -18,6 +18,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+ /*GUI code: look at symmetry dockable code*/
+
 #include "config.h"
 
 #include <gegl.h>

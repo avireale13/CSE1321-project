@@ -191,14 +191,36 @@ gimp_paintbrush_real_get_paint_params (GimpPaintbrush            *paintbrush,
                                        GimpPaintApplicationMode  *paint_appl_mode,
                                        const GimpTempBuf        **paint_pixmap,
                                        GimpRGB                   *paint_color)
-{
-  GimpPaintCore *paint_core = GIMP_PAINT_CORE (paintbrush);
+{bool toggle;
+ if (toggle == true)
+ {
+   GimpPaintCore    *paint_core = GIMP_PAINT_CORE (paintbrush);
+  GimpBrushCore    *brush_core = GIMP_BRUSH_CORE (paintbrush);
+  GimpContext      *context    = GIMP_CONTEXT (paint_options);
+  GimpDynamics     *dynamics   = brush_core->dynamics;
+  GimpImage        *image      = gimp_item_get_image (GIMP_ITEM (drawable));
+  const GimpCoords *coords     = gimp_symmetry_get_origin (sym);
+  gdouble           fade_point;
+  gdouble           grad_point;
+
+  fade_point = gimp_paint_options_get_fade (paint_options, image,
+                                            paint_core->pixel_dist);
+
+  grad_point = gimp_dynamics_get_linear_value (dynamics,
+                                               GIMP_DYNAMICS_OUTPUT_COLOR,
+                                               coords,
+                                               paint_options,
+                                               fade_point);
+ }
+ else 
+ {
+   GimpPaintCore *paint_core = GIMP_PAINT_CORE (paintbrush);
   GimpBrushCore *brush_core = GIMP_BRUSH_CORE (paintbrush);
   GimpContext   *context    = GIMP_CONTEXT (paint_options);
   GimpImage     *image      = gimp_item_get_image (GIMP_ITEM (drawable));
 
   *paint_mode = gimp_context_get_paint_mode (context);
-
+ }
   if (gimp_paint_options_get_gradient_color (paint_options, image,
                                              grad_point,
                                              paint_core->pixel_dist,

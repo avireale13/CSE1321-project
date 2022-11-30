@@ -70,19 +70,41 @@ static void       gimp_paintbrush_real_get_paint_params        (GimpPaintbrush  
 
 G_DEFINE_TYPE (GimpPaintbrush, gimp_paintbrush, GIMP_TYPE_BRUSH_CORE)
 
+bool toggle;
+ if (toggle == true)
+ {
+   GimpPaintCore    *paint_core = GIMP_PAINT_CORE (paintbrush);
+  GimpBrushCore    *brush_core = GIMP_BRUSH_CORE (paintbrush);
+  GimpContext      *context    = GIMP_CONTEXT (paint_options);
+  GimpDynamics     *dynamics   = brush_core->dynamics;
+  GimpImage        *image      = gimp_item_get_image (GIMP_ITEM (drawable));
+  const GimpCoords *coords     = gimp_symmetry_get_origin (sym);
+  gdouble           fade_point;
+  gdouble           grad_point;
 
+  fade_point = gimp_paint_options_get_fade (paint_options, image,
+                                            paint_core->pixel_dist);
+
+  grad_point = gimp_dynamics_get_linear_value (dynamics,
+                                               GIMP_DYNAMICS_OUTPUT_COLOR,
+                                               coords,
+                                               paint_options,
+                                               fade_point);
+ }
+ else 
+ {  
 void
 gimp_paintbrush_register (Gimp                      *gimp,
                           GimpPaintRegisterCallback  callback)
-{
+  {
   (* callback) (gimp,
                 GIMP_TYPE_PAINTBRUSH,
                 GIMP_TYPE_PAINT_OPTIONS,
                 "gimp-paintbrush",
                 _("Paintbrush"),
                 "gimp-tool-paintbrush");
-}
-
+  }
+ }
 static void
 gimp_paintbrush_class_init (GimpPaintbrushClass *klass)
 {
